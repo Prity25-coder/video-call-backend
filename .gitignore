@@ -2,7 +2,7 @@
 .env*
 
 # don't ingore .env.example file (which will help other developor)
-!.env.example
+# !.env.example
 
 # ignore .git folder
 .git
