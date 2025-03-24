@@ -4,9 +4,26 @@ import { Server } from "socket.io";
 
 const { port } = ENV_CONFIG;
 
+const server = app.listen(port, () => {
+  console.log(`Server started at http://localhost:${port}`);
+});
+
+server.on("error", (err) => {
+  switch (err.code) {
+    case "EACCES":
+      console.error("Require elevated privileges..");
+      return process.exit(1);
+    case "EADDRINUSE":
+      console.error(`${port} is already in use..`);
+      return process.exit(1);
+    default:
+      throw err;
+  }
+});
+
 // Create socket server
 //TODO server
-const io = new Server({
+const io = new Server(server, {
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
@@ -44,26 +61,9 @@ io.on("connection", (socket) => {
     io.to(to).emit("peer:nego:needed", { from: socket.id, offer });
   });
 
-  socket.on("peer:nego;done", ({ to, ans }) => {
+  socket.on("peer:nego:done", ({ to, ans }) => {
     io.to(to).emit("peer:nego:final", { from: socket.id, ans });
   });
-});
-
-const server = app.listen(port, () => {
-  console.log(`Server started at http://localhost:${port}`);
-});
-
-server.on("error", (err) => {
-  switch (err.code) {
-    case "EACCES":
-      console.error("Require elevated privileges..");
-      return process.exit(1);
-    case "EADDRINUSE":
-      console.error(`${port} is already in use..`);
-      return process.exit(1);
-    default:
-      throw err;
-  }
 });
 
 io.listen(3000);
