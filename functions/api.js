@@ -1,4 +1,4 @@
 import serverless from "serverless-http"
-import server from "../"
+import io from "../"
 
-export const handler = serverless(server);
+export const handler = serverless(io);
