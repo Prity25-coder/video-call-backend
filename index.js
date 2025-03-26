@@ -68,4 +68,4 @@ io.on("connection", (socket) => {
 
 io.listen(3000);
 
-export default io;
+export default server;
