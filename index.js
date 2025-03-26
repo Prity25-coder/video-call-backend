@@ -28,6 +28,7 @@ const io = new Server(server, {
     origin: "*",
     methods: ["GET", "POST"],
   },
+  transports: ['polling']
 });
 
 const emailToSocketMapping = new Map();
