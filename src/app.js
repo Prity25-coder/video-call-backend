@@ -3,6 +3,11 @@ import express from "express";
 
 const app = express();
 
+// Define a route for the root URL
+app.get('/', (req, res) => {
+  res.send('Welcome to the homepage!');
+});
+
 // parse json of incoming request body
 app.use(express.json({ limit: "17kb" }));
 

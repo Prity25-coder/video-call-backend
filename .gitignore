@@ -12,3 +12,5 @@ node_modules
 
 # ingroe .vscode
 .vscode
+# Local Netlify folder
+.netlify
