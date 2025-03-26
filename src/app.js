@@ -4,7 +4,7 @@ import express from "express";
 const app = express();
 
 // Define a route for the root URL
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.send('Welcome to the homepage!');
 });
 
